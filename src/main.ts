@@ -26,6 +26,7 @@ import {
   setKeySounds,
 } from "./files/store";
 import { mountEditor, EditorHandle } from "./editor/editor";
+import { toggleBold, toggleItalic, toggleHeading } from "./editor/markdown-toggle";
 import { prewarmKeySounds, playKey } from "./sound/keyboard";
 
 interface AppState {
@@ -499,34 +500,19 @@ async function handleMenuAction(action: string): Promise<void> {
     case "undo": document.execCommand("undo"); break;
     case "redo": document.execCommand("redo"); break;
     case "bold":
-      if (state.editor) {
-        const { toggleBold } = await import("./editor/markdown-toggle");
-        toggleBold(state.editor.view);
-      }
+      if (state.editor) toggleBold(state.editor.view);
       break;
     case "italic":
-      if (state.editor) {
-        const { toggleItalic } = await import("./editor/markdown-toggle");
-        toggleItalic(state.editor.view);
-      }
+      if (state.editor) toggleItalic(state.editor.view);
       break;
     case "h1":
-      if (state.editor) {
-        const { toggleHeading } = await import("./editor/markdown-toggle");
-        toggleHeading(state.editor.view, 1);
-      }
+      if (state.editor) toggleHeading(state.editor.view, 1);
       break;
     case "h2":
-      if (state.editor) {
-        const { toggleHeading } = await import("./editor/markdown-toggle");
-        toggleHeading(state.editor.view, 2);
-      }
+      if (state.editor) toggleHeading(state.editor.view, 2);
       break;
     case "h3":
-      if (state.editor) {
-        const { toggleHeading } = await import("./editor/markdown-toggle");
-        toggleHeading(state.editor.view, 3);
-      }
+      if (state.editor) toggleHeading(state.editor.view, 3);
       break;
     case "toggle-preview": toggleWysiwyg(); break;
     case "toggle-theme": toggleTheme(); break;

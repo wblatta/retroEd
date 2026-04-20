@@ -18,11 +18,11 @@ pub fn run() {
             rename_doc,
             delete_doc,
         ])
-        .setup(|app| {
+        .setup(|_app| {
             #[cfg(debug_assertions)]
             {
                 use tauri::Manager;
-                app.get_webview_window("main")
+                _app.get_webview_window("main")
                     .unwrap()
                     .open_devtools();
             }
