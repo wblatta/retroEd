@@ -235,6 +235,12 @@ async function bootstrap(): Promise<void> {
     if (state.keySounds) playKey(e.key);
   });
 
+  // Close context menus and dropdowns when clicking outside — registered once
+  document.addEventListener("mousedown", closeContextMenus, { capture: true });
+  document.addEventListener("click", (e) => {
+    if (!(e.target as HTMLElement).closest(".menu")) closeDropdowns();
+  });
+
   // Setup window dragging
   const appEl = document.getElementById("app");
   if (appEl) {
@@ -375,11 +381,6 @@ function render(): void {
 
   renderTitleAndStatus();
   renderMenuBarOnly();
-
-  // Close context menu on click outside
-  document.addEventListener("mousedown", closeContextMenus, { capture: true });
-  // Close dropdown menus on click outside
-  document.addEventListener("mousedown", closeDropdowns);
 }
 
 // ── HTML templates ─────────────────────────────────────────────────────────
@@ -485,6 +486,8 @@ function wireMenuBar(): void {
   });
 
   document.querySelectorAll(".menu-item").forEach((item) => {
+    // Prevent document mousedown from closing the dropdown before click fires
+    item.addEventListener("mousedown", (e) => e.stopPropagation());
     item.addEventListener("click", (e) => {
       const action = (e.currentTarget as HTMLElement).dataset.action ?? "";
       handleMenuAction(action);
