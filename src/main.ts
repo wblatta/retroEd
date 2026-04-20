@@ -144,11 +144,10 @@ function closeFile(): void {
   renderTitleAndStatus();
 }
 
-function toggleTheme(): void {
-  const order: Array<"amber" | "green" | "mac"> = ["amber", "green", "mac"];
-  const next = order[(order.indexOf(state.theme) + 1) % order.length];
-  state.theme = next;
-  setTheme(next);
+function selectTheme(theme: "amber" | "green" | "mac"): void {
+  if (state.theme === theme) return;
+  state.theme = theme;
+  setTheme(theme);
   render();
 }
 
@@ -219,7 +218,7 @@ async function bootstrap(): Promise<void> {
     if (e.key === "n") { e.preventDefault(); await newFile(); }
     else if (e.key === "o") { e.preventDefault(); await pickFolder(); }
     else if (e.key === "s") { e.preventDefault(); await saveCurrent(); }
-    else if (e.key === "t") { e.preventDefault(); toggleTheme(); }
+    else if (e.key === "t") { e.preventDefault(); selectTheme(state.theme === "amber" ? "green" : state.theme === "green" ? "mac" : "amber"); }
     else if (e.key === "p") { e.preventDefault(); toggleWysiwyg(); }
     else if (e.key === "/") { e.preventDefault(); showCheatsheet(); }
   });
@@ -325,14 +324,17 @@ function renderSidebarOnly(): void {
 }
 
 function renderMenuBarOnly(): void {
-  const previewItem = document.querySelector('[data-action="toggle-preview"]');
-  const soundItem = document.querySelector('[data-action="toggle-sounds"]');
-  if (previewItem) {
-    previewItem.textContent = `Live Preview ${state.wysiwyg ? "✓" : ""}  ⌘P`;
-  }
-  if (soundItem) {
-    soundItem.textContent = `Key Sounds ${state.keySounds ? "✓" : ""}`;
-  }
+  const q = (a: string) => document.querySelector(`[data-action="${a}"]`);
+  const previewItem = q("toggle-preview");
+  const soundItem = q("toggle-sounds");
+  const amberItem = q("theme-amber");
+  const greenItem = q("theme-green");
+  const macItem = q("theme-mac");
+  if (previewItem) previewItem.textContent = `Live Preview ${state.wysiwyg ? "✓" : ""}  ⌘P`;
+  if (soundItem) soundItem.textContent = `Key Sounds ${state.keySounds ? "✓" : ""}`;
+  if (amberItem) amberItem.textContent = `${state.theme === "amber" ? "✓ " : ""}CRT Amber`;
+  if (greenItem) greenItem.textContent = `${state.theme === "green" ? "✓ " : ""}CRT Green`;
+  if (macItem) macItem.textContent = `${state.theme === "mac" ? "✓ " : ""}Classic Mac`;
 }
 
 // ── Full render ────────────────────────────────────────────────────────────
@@ -402,6 +404,7 @@ function appShellHTML(): string {
         { label: "New  ⌘N", action: "new-file" },
         { label: "Open Folder…  ⌘O", action: "open-folder" },
         { label: "Save  ⌘S", action: "save" },
+        { label: "Rename…", action: "rename-current" },
         { label: "separator", action: "" },
         { label: "Close", action: "close-file" },
       ])}
@@ -418,7 +421,10 @@ function appShellHTML(): string {
       ])}
       ${menuHTML("View", [
         { label: "Live Preview  ⌘P", action: "toggle-preview" },
-        { label: "Cycle Theme  ⌘T", action: "toggle-theme" },
+        { label: "separator", action: "" },
+        { label: "CRT Amber", action: "theme-amber" },
+        { label: "CRT Green", action: "theme-green" },
+        { label: "Classic Mac", action: "theme-mac" },
         { label: "separator", action: "" },
         { label: "Key Sounds", action: "toggle-sounds" },
       ])}
@@ -514,8 +520,17 @@ async function handleMenuAction(action: string): Promise<void> {
     case "h3":
       if (state.editor) toggleHeading(state.editor.view, 3);
       break;
+    case "rename-current": {
+      if (state.currentPath) {
+        const entry = state.files.find(f => f.path === state.currentPath);
+        if (entry) await renameFile(entry);
+      }
+      break;
+    }
     case "toggle-preview": toggleWysiwyg(); break;
-    case "toggle-theme": toggleTheme(); break;
+    case "theme-amber": selectTheme("amber"); break;
+    case "theme-green": selectTheme("green"); break;
+    case "theme-mac": selectTheme("mac"); break;
     case "toggle-sounds": await toggleKeySounds(); break;
     case "cheatsheet": showCheatsheet(); break;
     case "about": showAbout(); break;

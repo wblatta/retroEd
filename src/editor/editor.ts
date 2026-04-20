@@ -18,6 +18,7 @@ import { markdown } from "@codemirror/lang-markdown";
 import {
   syntaxHighlighting,
   HighlightStyle,
+  syntaxTree,
 } from "@codemirror/language";
 import { tags } from "@lezer/highlight";
 
@@ -86,6 +87,34 @@ export function mountEditor(el: HTMLElement, opts: MountOptions): EditorHandle {
     {
       key: "Mod-n",
       run: () => { opts.onNew(); return true; },
+    },
+    {
+      // When cursor is right before a closing emphasis mark (**|** or *|*),
+      // place the newline after the closing mark so bold/italic stays intact.
+      key: "Enter",
+      run: (view) => {
+        const { state } = view;
+        const sel = state.selection.main;
+        if (!sel.empty) return false;
+        const pos = sel.from;
+        const tree = syntaxTree(state);
+        let node = tree.resolve(pos, 1);
+        while (node.parent) {
+          if (node.name === "StrongEmphasis" || node.name === "Emphasis") {
+            const closing = node.lastChild;
+            if (closing && closing.name === "EmphasisMark" && closing.from >= pos) {
+              view.dispatch({
+                changes: { from: closing.to, insert: "\n" },
+                selection: { anchor: closing.to + 1 },
+              });
+              return true;
+            }
+            break;
+          }
+          node = node.parent;
+        }
+        return false;
+      },
     },
   ]);
 
