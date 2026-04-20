@@ -57,13 +57,13 @@ Modern word processors are overwhelming. Plain Markdown editors are bland. retro
 git clone https://github.com/wblatta/retroEd.git
 cd retroEd
 npm install
-npm run tauri dev
+npm run dev
 ```
 
 ## Build a standalone app
 
 ```bash
-npm run tauri build
+npm run build
 ```
 
 The `.app` and `.dmg` land in `src-tauri/target/release/bundle/`. The release build is noticeably snappier than `tauri dev` — if you're testing the mechanical-keyboard latency or general responsiveness, build a release first.
