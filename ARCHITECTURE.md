@@ -1,4 +1,4 @@
-# retroProton — Architecture & Plan
+# retroEd — Architecture & Plan
 
 A small, aesthetic Markdown word processor for macOS with a CRT-phosphor or Classic-Mac chrome. Saves plain `.md` to a user-chosen folder; lets the filesystem (e.g. the Proton Drive Mac app) handle sync.
 
@@ -12,7 +12,7 @@ This document is the canonical architectural reference. Skim the Overview and Mo
 
 - **Files, not databases.** Every document is a plain UTF-8 `.md` on disk. No proprietary format, no sidecar index, no SQLite. The canonical representation is the file.
 - **Tiny surface area.** One editor pane, one sidebar, one menu bar, one status bar. No tabs, no panels, no settings pane bigger than a modal.
-- **Sync is delegated.** retroProton writes to a folder. Whatever app watches that folder (Proton Drive, iCloud, Dropbox, Syncthing, …) handles upload and encryption.
+- **Sync is delegated.** retroEd writes to a folder. Whatever app watches that folder (Proton Drive, iCloud, Dropbox, Syncthing, …) handles upload and encryption.
 - **Aesthetic is load-bearing.** The retro look is the product. Themes are first-class.
 - **Small binary, quick launch.** Tauri + system WebKit, not Electron.
 
@@ -31,7 +31,7 @@ This document is the canonical architectural reference. Skim the Overview and Mo
 
 ```
 ┌───────────────────────────────────────────────────────────────────┐
-│                         retroProton.app                           │
+│                         retroEd.app                           │
 │                                                                   │
 │   ┌─────────────────────┐        ┌─────────────────────────────┐  │
 │   │  Rust host (Tauri)  │<──IPC──│  WebKit webview             │  │
@@ -72,7 +72,7 @@ The Rust host owns the window, the filesystem, and the settings store. The webvi
 ```
 src-tauri/
   src/
-    main.rs               Thin entry: calls retroproton_lib::run()
+    main.rs               Thin entry: calls retroed_lib::run()
     lib.rs                All Tauri commands + plugin registration
   capabilities/
     default.json          Permission set granted to the main window
@@ -325,7 +325,7 @@ Filename on the left (with ● dirty / ○ saved indicator), word + char count o
 `openModal(title, body)` appends an overlay with a mini Classic Mac window containing a pinstripe title bar, a close box, and the body. Used by:
 
 - Markdown Cheatsheet (⌘/)
-- About retroProton
+- About retroEd
 - Rename dialog (`promptName`)
 
 ---
@@ -388,7 +388,7 @@ npm run tauri dev
 npm run tauri build
 ```
 
-Produces `src-tauri/target/release/bundle/dmg/retroProton_0.1.0_aarch64.dmg` (or x64 equivalent). Code signing + notarization are not yet configured — a future `CI.md` will cover that with Apple Developer ID prerequisites.
+Produces `src-tauri/target/release/bundle/dmg/retroEd_0.1.0_aarch64.dmg` (or x64 equivalent). Code signing + notarization are not yet configured — a future `CI.md` will cover that with Apple Developer ID prerequisites.
 
 ### Open-source prep done
 
@@ -402,6 +402,6 @@ Produces `src-tauri/target/release/bundle/dmg/retroProton_0.1.0_aarch64.dmg` (or
 
 ## 11. Credits & trademarks
 
-retroProton is an independent project and is **not affiliated with, endorsed by, or sponsored by Proton AG**. "Proton Drive" is a trademark of Proton AG. The Classic Mac look is inspired by Apple's System 6/7 design; "Macintosh" and related visual references are trademarks of Apple Inc.
+retroEd is an independent project. The Classic Mac look is inspired by Apple's System 6/7 design; "Macintosh" and related visual references are trademarks of Apple Inc.
 
 Font fallbacks rely on Chicago / Charcoal (bundled with classic macOS) and IBM Plex Mono (SIL Open Font License 1.1).

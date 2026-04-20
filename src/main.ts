@@ -292,7 +292,7 @@ function renderTitleAndStatus(): void {
 
   const name = state.currentPath
     ? state.currentPath.split("/").pop() ?? ""
-    : "retroProton";
+    : "retroEd";
   titleEl.textContent = (state.dirty ? "● " : "") + name;
 
   if (state.currentPath) {
@@ -384,7 +384,7 @@ function render(): void {
 function splashHTML(): string {
   return `
     <div class="splash">
-      <div class="splash-logo">retroProton</div>
+      <div class="splash-logo">retroEd</div>
       <p class="splash-sub">A Markdown word processor with a CRT-phosphor soul.</p>
       <button class="btn btn-pick-folder">Choose Folder…</button>
     </div>
@@ -394,7 +394,7 @@ function splashHTML(): string {
 function appShellHTML(): string {
   return `
     <div class="title-bar">
-      <span class="title-bar-text">retroProton</span>
+      <span class="title-bar-text">retroEd</span>
     </div>
     <div class="menu-bar">
       ${menuHTML("File", [
@@ -424,7 +424,7 @@ function appShellHTML(): string {
       ${menuHTML("Help", [
         { label: "Markdown Cheatsheet  ⌘/", action: "cheatsheet" },
         { label: "separator", action: "" },
-        { label: "About retroProton", action: "about" },
+        { label: "About retroEd", action: "about" },
       ])}
       <div class="menu-bar-spacer"></div>
     </div>
@@ -675,9 +675,9 @@ function showCheatsheet(): void {
 }
 
 function showAbout(): void {
-  openModal("About retroProton", `
+  openModal("About retroEd", `
     <div class="about-body">
-      <p><strong>retroProton</strong> v0.1.0</p>
+      <p><strong>retroEd</strong> v0.1.0</p>
       <p>A tiny, aesthetic Markdown word processor for macOS.</p>
       <p>MIT License · <a href="https://github.com/wblatta/retroEd">github.com/wblatta/retroEd</a></p>
     </div>

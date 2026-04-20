@@ -161,5 +161,5 @@ pub fn run() {
             Ok(())
         })
         .run(tauri::generate_context!())
-        .expect("error while running retroProton");
+        .expect("error while running retroEd");
 }

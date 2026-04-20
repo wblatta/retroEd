@@ -1,4 +1,4 @@
-# Contributing to retroProton
+# Contributing to retroEd
 
 Thanks for considering a contribution.
 
@@ -12,8 +12,8 @@ Install prerequisites:
 Clone and run:
 
 ```bash
-git clone https://github.com/YOUR-HANDLE/retroProton.git
-cd retroProton
+git clone https://github.com/wblatta/retroEd.git
+cd retroEd
 npm install
 npm run tauri dev
 ```
@@ -29,9 +29,9 @@ npx tsc --noEmit           # TypeScript type-check
 
 ## Scope guidelines
 
-retroProton tries to stay small. Before opening a PR for a new feature, please open an issue first so we can discuss whether it fits. Things that generally do *not* belong:
+retroEd tries to stay small. Before opening a PR for a new feature, please open an issue first so we can discuss whether it fits. Things that generally do *not* belong:
 
-- Cloud service integrations (retroProton intentionally treats sync as the filesystem's job)
+- Cloud service integrations (retroEd intentionally treats sync as the filesystem's job)
 - Non-Markdown formats
 - Collaborative editing
 - Heavyweight WYSIWYG (we have Live Preview, which is the deliberate ceiling)

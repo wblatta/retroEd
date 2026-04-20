@@ -1,7 +1,7 @@
 {
-  "productName": "retroProton",
+  "productName": "retroEd",
   "version": "0.1.0",
-  "identifier": "com.retroproton.app",
+  "identifier": "com.retroed.app",
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://localhost:1420",
@@ -12,7 +12,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "retroProton",
+        "title": "retroEd",
         "width": 1024,
         "height": 720,
         "minWidth": 640,

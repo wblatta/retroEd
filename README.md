@@ -1,10 +1,10 @@
-# retroProton
+# retroEd
 
-A tiny, aesthetic Markdown word processor for macOS with a CRT-phosphor soul and a Classic Mac chrome. Saves plain `.md` files in a folder you pick — put that folder inside your Proton Drive (or any other sync service) and your documents sync automatically.
+A tiny, aesthetic Markdown word processor for macOS with a CRT-phosphor soul and a Classic Mac chrome. Saves plain `.md` files in a folder you pick — put that folder inside your sync service of choice and your documents sync automatically.
 
 ```
   ┌─────────────────────────────────────────────────┐
-  │  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ retroProton ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀  │
+  │  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ retroEd ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀  │
   │  File  Edit  Format  View  Help                 │
   ├────────────┬────────────────────────────────────┤
   │ Documents+ │                                    │
@@ -18,7 +18,7 @@ A tiny, aesthetic Markdown word processor for macOS with a CRT-phosphor soul and
 
 ## Why
 
-Modern word processors are overwhelming. Plain Markdown editors are bland. retroProton lands in between: real file-on-disk Markdown (no lock-in, no proprietary format) rendered through a deliberately playful retro UI.
+Modern word processors are overwhelming. Plain Markdown editors are bland. retroEd lands in between: real file-on-disk Markdown (no lock-in, no proprietary format) rendered through a deliberately playful retro UI.
 
 ## Features
 
@@ -54,8 +54,8 @@ Modern word processors are overwhelming. Plain Markdown editors are bland. retro
 ## Run from source
 
 ```bash
-git clone https://github.com/YOUR-HANDLE/retroProton.git
-cd retroProton
+git clone https://github.com/wblatta/retroEd.git
+cd retroEd
 npm install
 npm run tauri dev
 ```
@@ -72,9 +72,7 @@ Code signing and notarization are not yet configured; you'll see a Gatekeeper wa
 
 ## How documents are stored
 
-retroProton writes UTF-8 `.md` files to a folder you pick on first launch. It does **not** talk to Proton Drive directly — the official Proton Drive Mac client watches its own sync folder and handles encryption + upload. Pick any subfolder inside that sync location (for example, `~/Library/CloudStorage/ProtonDrive-<acct>/writing/`) and retroProton drops plain Markdown files there.
-
-If you don't use Proton Drive, any other folder works the same way: Dropbox, iCloud Drive, Syncthing, a local disk, whatever.
+retroEd writes UTF-8 `.md` files to a folder you pick on first launch. It does **not** talk to any cloud provider directly — just pick any folder inside your sync location (Proton Drive, Dropbox, iCloud Drive, Syncthing, or a plain local folder) and retroEd drops plain Markdown files there.
 
 ## Tech stack
 
@@ -113,5 +111,3 @@ Bundled keyboard-click sample is [`157766__enok123__keyboard-click.wav`](https:/
 ## License
 
 MIT — see [LICENSE](LICENSE).
-
-retroProton is not affiliated with Proton AG. "Proton Drive" is a trademark of Proton AG.
