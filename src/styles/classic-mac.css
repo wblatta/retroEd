@@ -1,0 +1,467 @@
+/* ── Reset & base ────────────────────────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: "Chicago", "Charcoal", "Geneva", system-ui, sans-serif;
+  font-size: 13px;
+  background: #000;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Title bar ───────────────────────────────────────────────────────────── */
+
+.title-bar {
+  height: 28px;
+  min-height: 28px;
+  background: repeating-linear-gradient(
+    180deg,
+    #c0c0c0 0px,
+    #c0c0c0 1px,
+    #888 1px,
+    #888 2px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 80px;
+  -webkit-app-region: drag;
+  user-select: none;
+  cursor: default;
+  border-bottom: 1px solid #555;
+}
+
+.title-bar-text {
+  font-size: 11px;
+  font-weight: bold;
+  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 400px;
+  background: #c0c0c0;
+  padding: 0 6px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+}
+
+/* ── Menu bar ────────────────────────────────────────────────────────────── */
+
+.menu-bar {
+  display: flex;
+  align-items: stretch;
+  background: #c0c0c0;
+  border-bottom: 2px solid #555;
+  height: 24px;
+  min-height: 24px;
+  -webkit-app-region: no-drag;
+  user-select: none;
+  position: relative;
+  z-index: 100;
+}
+
+.menu-bar-spacer {
+  flex: 1;
+  -webkit-app-region: drag;
+}
+
+.menu {
+  position: relative;
+}
+
+.menu-label {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  height: 24px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #111;
+  cursor: default;
+}
+
+.menu-label:hover,
+.menu.open .menu-label {
+  background: #000;
+  color: #fff;
+}
+
+.menu-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #c0c0c0;
+  border: 2px solid #555;
+  border-top: none;
+  list-style: none;
+  min-width: 180px;
+  z-index: 200;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+}
+
+.menu.open .menu-dropdown {
+  display: block;
+}
+
+.menu-item {
+  padding: 3px 16px;
+  font-size: 12px;
+  color: #111;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.menu-item:hover {
+  background: #000;
+  color: #fff;
+}
+
+.menu-sep {
+  height: 1px;
+  background: #888;
+  margin: 2px 4px;
+}
+
+/* ── Workspace ───────────────────────────────────────────────────────────── */
+
+.workspace {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+
+.sidebar {
+  width: 160px;
+  min-width: 120px;
+  max-width: 240px;
+  display: flex;
+  flex-direction: column;
+  border-right: 2px solid #555;
+  background: #d4d0c8;
+  overflow: hidden;
+  user-select: none;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+  border-bottom: 1px solid #888;
+  background: #c0c0c0;
+}
+
+.sidebar-title {
+  font-size: 11px;
+  font-weight: bold;
+  color: #111;
+}
+
+.sidebar-new-btn {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #555;
+  background: #c0c0c0;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111;
+}
+
+.sidebar-new-btn:hover {
+  background: #888;
+  color: #fff;
+}
+
+.sidebar-list {
+  list-style: none;
+  overflow-y: auto;
+  flex: 1;
+  padding: 2px 0;
+}
+
+.sidebar-item {
+  padding: 3px 8px;
+  font-size: 12px;
+  color: #111;
+  cursor: default;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-item:hover {
+  background: #b0aca4;
+}
+
+.sidebar-item.active {
+  background: #000;
+  color: #fff;
+}
+
+/* ── Editor area ─────────────────────────────────────────────────────────── */
+
+.editor-area {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-frame {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+}
+
+.editor-placeholder {
+  padding: 40px;
+  color: #888;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* ── Status bar ──────────────────────────────────────────────────────────── */
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 20px;
+  min-height: 20px;
+  padding: 0 8px;
+  background: #c0c0c0;
+  border-top: 2px solid #555;
+  font-size: 11px;
+  color: #333;
+  user-select: none;
+}
+
+.status-file {
+  font-weight: bold;
+}
+
+.status-counts {
+  color: #555;
+}
+
+/* ── Context menu ────────────────────────────────────────────────────────── */
+
+.context-menu {
+  position: fixed;
+  background: #c0c0c0;
+  border: 2px solid #555;
+  list-style: none;
+  min-width: 160px;
+  z-index: 500;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+}
+
+.context-menu-item {
+  padding: 3px 16px;
+  font-size: 12px;
+  color: #111;
+  cursor: default;
+}
+
+.context-menu-item:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* ── Modals ──────────────────────────────────────────────────────────────── */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-window {
+  background: #c0c0c0;
+  border: 2px solid #555;
+  min-width: 280px;
+  max-width: 520px;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+}
+
+.modal-title-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  background: repeating-linear-gradient(
+    180deg,
+    #c0c0c0 0px, #c0c0c0 1px,
+    #888 1px, #888 2px
+  );
+  border-bottom: 1px solid #555;
+}
+
+.modal-close-box {
+  width: 14px;
+  height: 14px;
+  border: 1px solid #333;
+  background: #c0c0c0;
+  font-size: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.modal-close-box:hover {
+  background: #888;
+}
+
+.modal-title {
+  font-size: 11px;
+  font-weight: bold;
+  color: #111;
+}
+
+.modal-body {
+  padding: 16px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.btn {
+  padding: 3px 14px;
+  border: 2px solid #555;
+  background: #c0c0c0;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  color: #111;
+}
+
+.btn:hover {
+  background: #b0aca4;
+}
+
+.btn:active {
+  background: #888;
+}
+
+.btn-ok {
+  font-weight: bold;
+}
+
+.btn-danger {
+  color: #c00;
+}
+
+.btn-pick-folder {
+  font-size: 14px;
+  padding: 8px 24px;
+}
+
+/* ── Rename form ─────────────────────────────────────────────────────────── */
+
+.rename-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rename-input {
+  width: 100%;
+  padding: 3px 6px;
+  border: 2px inset #888;
+  background: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  color: #111;
+}
+
+.rename-input:focus {
+  outline: none;
+  border-color: #000;
+}
+
+/* ── Cheatsheet ──────────────────────────────────────────────────────────── */
+
+.cheatsheet-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.cheatsheet-table td {
+  padding: 3px 8px;
+  border-bottom: 1px solid #aaa;
+}
+
+.cheatsheet-table td:first-child {
+  font-family: "Courier New", monospace;
+  background: #f0f0f0;
+  border-right: 1px solid #aaa;
+}
+
+.cheatsheet-shortcuts {
+  margin-top: 12px;
+  font-size: 11px;
+  color: #555;
+}
+
+/* ── About ───────────────────────────────────────────────────────────────── */
+
+.about-body p {
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.about-body a {
+  color: #000;
+}
+
+/* ── Splash screen ───────────────────────────────────────────────────────── */
+
+.splash {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: #c0c0c0;
+  padding: 40px;
+}
+
+.splash-logo {
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #111;
+}
+
+.splash-sub {
+  font-size: 13px;
+  color: #444;
+  max-width: 320px;
+  text-align: center;
+}

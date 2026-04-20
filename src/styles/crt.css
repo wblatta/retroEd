@@ -1,0 +1,342 @@
+/* ── CodeMirror base resets ──────────────────────────────────────────────── */
+
+.editor-frame .cm-editor {
+  height: 100%;
+  outline: none;
+}
+
+.editor-frame .cm-scroller {
+  font-family: "IBM Plex Mono", "Courier New", "Courier", monospace;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── Syntax highlight classes (shared across themes) ────────────────────── */
+
+.md-h  { font-weight: bold; }
+.md-h1 { font-size: 1.6em; }
+.md-h2 { font-size: 1.35em; }
+.md-h3 { font-size: 1.15em; }
+.md-bold  { font-weight: bold; }
+.md-italic { font-style: italic; }
+.md-code  { font-family: "IBM Plex Mono", monospace; background: rgba(255,255,255,0.12); padding: 0 3px; border-radius: 2px; }
+.md-quote { opacity: 0.75; font-style: italic; }
+.md-hr    { opacity: 0.4; }
+
+/* lezer tag classes */
+.tok-h1, .tok-h2, .tok-h3 { font-weight: bold; }
+.tok-strong { font-weight: bold; }
+.tok-em     { font-style: italic; }
+.tok-code   { font-family: "IBM Plex Mono", monospace; }
+.tok-link   { text-decoration: underline; }
+.tok-url    { opacity: 0.7; }
+.tok-quote  { opacity: 0.75; }
+
+/* ── CRT Amber theme ─────────────────────────────────────────────────────── */
+
+.editor-frame.theme-amber {
+  background: #0d0800;
+  position: relative;
+}
+
+.editor-frame.theme-amber .cm-editor {
+  background: transparent;
+  color: #FFB000;
+}
+
+.editor-frame.theme-amber .cm-scroller {
+  color: #FFB000;
+  text-shadow:
+    0 0 4px rgba(255, 176, 0, 0.8),
+    0 0 8px rgba(255, 176, 0, 0.4);
+}
+
+.editor-frame.theme-amber .cm-cursor {
+  border-left: none;
+  background: #FFB000;
+  width: 0.6em;
+  box-shadow: 0 0 6px rgba(255, 176, 0, 0.9);
+}
+
+.editor-frame.theme-amber .cm-selectionBackground {
+  background: rgba(255, 176, 0, 0.3) !important;
+}
+
+.editor-frame.theme-amber .cm-activeLine {
+  background: rgba(255, 176, 0, 0.06);
+}
+
+.editor-frame.theme-amber .md-code {
+  background: rgba(255, 176, 0, 0.15);
+  color: #ffd060;
+}
+
+/* Scanline overlay */
+.editor-frame.theme-amber::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.18) 2px,
+    rgba(0, 0, 0, 0.18) 4px
+  );
+  z-index: 10;
+}
+
+/* Vignette */
+.editor-frame.theme-amber::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 60%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  z-index: 11;
+}
+
+/* ── CRT Green theme ─────────────────────────────────────────────────────── */
+
+.editor-frame.theme-green {
+  background: #000d00;
+  position: relative;
+}
+
+.editor-frame.theme-green .cm-editor {
+  background: transparent;
+  color: #33FF33;
+}
+
+.editor-frame.theme-green .cm-scroller {
+  color: #33FF33;
+  text-shadow:
+    0 0 4px rgba(51, 255, 51, 0.8),
+    0 0 8px rgba(51, 255, 51, 0.4);
+}
+
+.editor-frame.theme-green .cm-cursor {
+  border-left: none;
+  background: #33FF33;
+  width: 0.6em;
+  box-shadow: 0 0 6px rgba(51, 255, 51, 0.9);
+}
+
+.editor-frame.theme-green .cm-selectionBackground {
+  background: rgba(51, 255, 51, 0.3) !important;
+}
+
+.editor-frame.theme-green .cm-activeLine {
+  background: rgba(51, 255, 51, 0.06);
+}
+
+.editor-frame.theme-green .md-code {
+  background: rgba(51, 255, 51, 0.15);
+  color: #88ff88;
+}
+
+.editor-frame.theme-green::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.18) 2px,
+    rgba(0, 0, 0, 0.18) 4px
+  );
+  z-index: 10;
+}
+
+.editor-frame.theme-green::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 60%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  z-index: 11;
+}
+
+/* ── Classic Mac theme ───────────────────────────────────────────────────── */
+
+.editor-frame.theme-mac {
+  background: #ffffff;
+}
+
+.editor-frame.theme-mac .cm-editor {
+  background: #ffffff;
+  color: #000000;
+}
+
+.editor-frame.theme-mac .cm-scroller {
+  font-family: "Chicago", "Charcoal", "Geneva", system-ui, sans-serif;
+  color: #000000;
+  text-shadow: none;
+}
+
+.editor-frame.theme-mac .cm-cursor {
+  border-left: 2px solid #000;
+  background: transparent;
+  width: auto;
+  box-shadow: none;
+}
+
+.editor-frame.theme-mac .cm-selectionBackground {
+  background: #000000 !important;
+}
+
+.editor-frame.theme-mac .cm-content ::selection {
+  background: #000000;
+  color: #ffffff;
+}
+
+.editor-frame.theme-mac .cm-activeLine {
+  background: transparent;
+}
+
+.editor-frame.theme-mac .md-code {
+  background: #e8e8e8;
+  color: #000;
+  border: 1px solid #ccc;
+  font-family: "Courier New", monospace;
+}
+
+.editor-frame.theme-mac .md-h1 { font-size: 1.6em; border-bottom: 2px solid #000; }
+.editor-frame.theme-mac .md-h2 { font-size: 1.35em; border-bottom: 1px solid #000; }
+
+/* Theme-specific sidebar and status bar overrides */
+
+.app.theme-amber .sidebar,
+.app.theme-green .sidebar {
+  background: #111;
+  border-right-color: #333;
+}
+
+.app.theme-amber .sidebar-header,
+.app.theme-green .sidebar-header {
+  background: #0a0a0a;
+  border-bottom-color: #333;
+}
+
+.app.theme-amber .sidebar-title,
+.app.theme-green .sidebar-title {
+  color: #888;
+}
+
+.app.theme-amber .sidebar-item,
+.app.theme-green .sidebar-item {
+  color: #777;
+}
+
+.app.theme-amber .sidebar-item:hover,
+.app.theme-green .sidebar-item:hover {
+  background: #222;
+  color: #aaa;
+}
+
+.app.theme-amber .sidebar-item.active {
+  background: #FFB000;
+  color: #000;
+}
+
+.app.theme-green .sidebar-item.active {
+  background: #33FF33;
+  color: #000;
+}
+
+.app.theme-amber .sidebar-new-btn,
+.app.theme-green .sidebar-new-btn {
+  background: #111;
+  border-color: #444;
+  color: #888;
+}
+
+.app.theme-amber .status-bar,
+.app.theme-green .status-bar {
+  background: #111;
+  border-top-color: #333;
+  color: #666;
+}
+
+.app.theme-amber .status-file { color: #FFB000; }
+.app.theme-green .status-file { color: #33FF33; }
+
+.app.theme-amber .title-bar,
+.app.theme-green .title-bar {
+  background: repeating-linear-gradient(
+    180deg, #1a1a1a 0px, #1a1a1a 1px, #0a0a0a 1px, #0a0a0a 2px
+  );
+  border-bottom-color: #333;
+}
+
+.app.theme-amber .title-bar-text {
+  background: #0d0800;
+  color: #FFB000;
+  text-shadow: 0 0 4px rgba(255,176,0,0.8);
+}
+
+.app.theme-green .title-bar-text {
+  background: #000d00;
+  color: #33FF33;
+  text-shadow: 0 0 4px rgba(51,255,51,0.8);
+}
+
+.app.theme-amber .menu-bar,
+.app.theme-green .menu-bar {
+  background: #1a1a1a;
+  border-bottom-color: #333;
+}
+
+.app.theme-amber .menu-label,
+.app.theme-green .menu-label {
+  color: #aaa;
+}
+
+.app.theme-amber .menu-label:hover,
+.app.theme-amber .menu.open .menu-label {
+  background: #FFB000;
+  color: #000;
+}
+
+.app.theme-green .menu-label:hover,
+.app.theme-green .menu.open .menu-label {
+  background: #33FF33;
+  color: #000;
+}
+
+.app.theme-amber .menu-dropdown,
+.app.theme-green .menu-dropdown {
+  background: #1a1a1a;
+  border-color: #444;
+}
+
+.app.theme-amber .menu-item,
+.app.theme-green .menu-item {
+  color: #aaa;
+}
+
+.app.theme-amber .menu-item:hover {
+  background: #FFB000;
+  color: #000;
+}
+
+.app.theme-green .menu-item:hover {
+  background: #33FF33;
+  color: #000;
+}
+
+.app.theme-amber .menu-sep,
+.app.theme-green .menu-sep {
+  background: #333;
+}
